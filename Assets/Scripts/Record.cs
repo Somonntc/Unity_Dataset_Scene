@@ -14,13 +14,14 @@ public class Record : MonoBehaviour
     private Transform cameraTransform;
     private Transform start;
     private float timer = 3f;
+    private int rotateCounter_x = 1;
+    private int rotateCounter_y = 0;
 
     //Don't change the Awake() and GetRecordWindow function
     //It basically just go and launch the record window (F10 on unity)
     //It also keeo the parameter, so don't forget to change them before launching the script
     private void Awake() {
         cameraTransform = prefabPosition.GetComponent<Transform>();
-        Debug.Log("cameraTransform : "+ cameraTransform.position);
     }
     private static RecorderWindow GetRecorderWindow(){
         return (RecorderWindow)EditorWindow.GetWindow(typeof(RecorderWindow));
@@ -32,30 +33,35 @@ public class Record : MonoBehaviour
 
     //Only rotate for the moment, 90 on the y axis to see if it works correctly
     private IEnumerator AutomaticRecord(){
+        //rotateCounter_x != 4 && rotateCounter_y % 4 != 0
         while(true){
-            //Instantiate the prefab, fastest and easiest way I found to "reload" the prefab when the record is over (for the next one)
-            model = Instantiate(prefab, new Vector3(0f , 0f, 0f), Quaternion.Euler(0f, 90f, 0f));
-            Destroy(model, timer);
-            
-            //Change only this line (or add)
-            cameraTransform.Rotate(prefabPosition.transform.rotation.x, prefabPosition.transform.rotation.y + 90, prefabPosition.transform.rotation.z);
-            
-            //Don't change anything after this
-            Debug.Log("CameraTransform in coroutine : " + cameraTransform.position);
+            //Get the window for the record
             RecorderWindow recorderWindow = GetRecorderWindow();
-            if(!recorderWindow.IsRecording()){
-                Debug.Log("Start recording");
-                recorderWindow.StartRecording();
-                Debug.Log("Is recording (Start boucle): " + recorderWindow.IsRecording());
-            }else{
-                Debug.Log("is Recording : (stop and start boucle) " + recorderWindow.IsRecording());
-                Debug.Log("Stop and Start recording");
+
+            //End the recording
+            if(rotateCounter_x == 4 && rotateCounter_y == 4){
                 recorderWindow.StopRecording();
-                Debug.Log("is Recording : (after stop) " + recorderWindow.IsRecording());
-                Debug.Log("Start again recording");
+                yield break;
+            }
+
+            //Instantiate the prefab, fastest and easiest way I found to "reload" the prefab when the record is over (for the next one)
+            //Change only the rotation added (here 90 for example) and/or the x rotation for the prefab instance (depending of what type of fall you want)
+            model = Instantiate(prefab, new Vector3(0f , 0f, 0f), Quaternion.Euler(5f, 90f, 0f));
+            Destroy(model, timer);
+            if(rotateCounter_y%4 == 0 && rotateCounter_y != 0){
+                rotateCounter_x += 1;
+                rotateCounter_y = 0;
+                prefabPosition.transform.Rotate(90, 0, 0);
+            }
+            cameraTransform.Rotate(prefabPosition.transform.rotation.x, prefabPosition.transform.rotation.y + 90, prefabPosition.transform.rotation.z);
+            rotateCounter_y += 1;
+
+            //Don't change anything
+            if(!recorderWindow.IsRecording()){
                 recorderWindow.StartRecording();
-                Debug.Log("is Recording : (after start) " + recorderWindow.IsRecording());
-                Debug.Log("End of boucle");
+            }else{
+                recorderWindow.StopRecording();
+                recorderWindow.StartRecording();
             }
             yield return new WaitForSeconds(timer);
         }
