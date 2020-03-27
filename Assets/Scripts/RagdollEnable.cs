@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class RagdollEnable : MonoBehaviour
 {
-    private LayerMask m_layer;
-    private ContactPoint contactpoint;
-    public static bool test;
+    //private LayerMask m_layer;
+    public static bool m_isKinematic;
+
+    //On fait en sorte que toutes les parties du corps du ragdoll soient Kinematic
+    //Kinematic : RigidBody et Box collider, mais le ragdoll sera fix (il tombera pas comme on avait avant)
     public void SetKinematic(bool newValue){
         Rigidbody[] bodies = GetComponentsInChildren<Rigidbody>();
         foreach(Rigidbody rb in bodies){
@@ -15,16 +17,16 @@ public class RagdollEnable : MonoBehaviour
     }
 
     private void Awake() {
-        test = true;
-        m_layer = LayerMask.NameToLayer("target");
-        Physics.IgnoreLayerCollision (9, 8, true);
+        m_isKinematic = true;
+        //m_layer = LayerMask.NameToLayer("target");
+        //Physics.IgnoreLayerCollision (9, 8, true);
     }
-
+ 
     private void Start() {
-        SetKinematic(true);
+        SetKinematic(m_isKinematic);
     }
 
     private void Update() {
-        SetKinematic(test);
+        SetKinematic(m_isKinematic);
     }    
 }
