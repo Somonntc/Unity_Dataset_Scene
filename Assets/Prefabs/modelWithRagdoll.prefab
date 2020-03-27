@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 4131735476989912683}
   - component: {fileID: 6331177374444964625}
   m_Layer: 0
-  m_Name: untitled
+  m_Name: modelWithRagdoll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2513,7 +2513,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6b169ee675c79d647bf72038dde460c9, type: 2}
+  - {fileID: 2100000, guid: 608a18560333ea241999184b9e475cb8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

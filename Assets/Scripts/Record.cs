@@ -13,6 +13,7 @@ public class Record : MonoBehaviour
     private GameObject model;
     private Transform cameraTransform;
     private Transform start;
+    private Rigidbody rb;
     private float timer = 3f;
     private int rotateCounter_x = 1;
     private int rotateCounter_y = 0;
@@ -39,21 +40,20 @@ public class Record : MonoBehaviour
             RecorderWindow recorderWindow = GetRecorderWindow();
 
             //End the recording
-            if(rotateCounter_x == 4 && rotateCounter_y == 4){
+            if(rotateCounter_x == 36 && rotateCounter_y == 36){
                 recorderWindow.StopRecording();
                 yield break;
             }
 
             //Instantiate the prefab, fastest and easiest way I found to "reload" the prefab when the record is over (for the next one)
-            //Change only the rotation added (here 90 for example) and/or the x rotation for the prefab instance (depending of what type of fall you want)
-            model = Instantiate(prefab, new Vector3(0f , 0f, 0f), Quaternion.Euler(5f, 90f, 0f));
+            model = Instantiate(prefab, new Vector3(0f , 0f, 0f), Quaternion.Euler(-13f, 90f, 0f));
             Destroy(model, timer);
-            if(rotateCounter_y%4 == 0 && rotateCounter_y != 0){
+            if(rotateCounter_y%36 == 0 && rotateCounter_y != 0){
                 rotateCounter_x += 1;
                 rotateCounter_y = 0;
-                prefabPosition.transform.Rotate(90, 0, 0);
+                prefabPosition.transform.Rotate(10, 0, 0);
             }
-            cameraTransform.Rotate(prefabPosition.transform.rotation.x, prefabPosition.transform.rotation.y + 90, prefabPosition.transform.rotation.z);
+            cameraTransform.Rotate(prefabPosition.transform.rotation.x, prefabPosition.transform.rotation.y + 10, prefabPosition.transform.rotation.z);
             rotateCounter_y += 1;
 
             //Don't change anything
