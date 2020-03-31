@@ -10,11 +10,13 @@ public class Record : MonoBehaviour
     private RecorderWindow recorderWindow;
     [SerializeField] private GameObject prefabPosition;
     [SerializeField] private GameObject prefab;
+    [SerializeField] private GameObject sphere;
+    private GameObject test;
     private GameObject model;
     private Transform cameraTransform;
     private Transform start;
     private Rigidbody rb;
-    private float timer = 3f;
+    private float timer = 4f;
     private int rotateCounter_x = 1;
     private int rotateCounter_y = 0;
 
@@ -46,7 +48,8 @@ public class Record : MonoBehaviour
             }
 
             //Instantiate the prefab, fastest and easiest way I found to "reload" the prefab when the record is over (for the next one)
-            model = Instantiate(prefab, new Vector3(0f , 0f, 0f), Quaternion.Euler(-13f, 90f, 0f));
+            model = Instantiate(prefab, new Vector3(0f , 0f, -1f), Quaternion.Euler(0f, 90f, 0f));
+            test = Instantiate(sphere, new Vector3(0.5f, 1.25f, 0.56f), Quaternion.Euler(0,0,0));
             Destroy(model, timer);
             if(rotateCounter_y%36 == 0 && rotateCounter_y != 0){
                 rotateCounter_x += 1;

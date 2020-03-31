@@ -7,6 +7,9 @@ public class RaycastForceOnRagdoll : MonoBehaviour
     private LayerMask m_layer;
     [SerializeField] private GameObject Object;
     private Transform t_object;
+    [SerializeField] private GameObject prefab;
+    private GameObject test;
+    
     
     private void Awake() {
         t_object = Object.GetComponent<Transform>();
@@ -15,6 +18,7 @@ public class RaycastForceOnRagdoll : MonoBehaviour
     void Update()
     {
         DisplayRaycastHit();
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x - 0.1f, 1.25f, 0.56f);
         //t_object.position = new Vector3(t_object.position.x, t_object.position.y, t_object.position.z - 0.01f);
     }
 
@@ -26,7 +30,7 @@ public class RaycastForceOnRagdoll : MonoBehaviour
             //On désactive le fait que tout le corps soit Kinematic, ce qui activera sa chute (il sera plus fix à sa position)
             RagdollEnable.m_isKinematic = false;
             //Application d'une force sur le point d'impact du raycast
-            hit.rigidbody.AddForce(-transform.forward * 20, ForceMode.Impulse);
+            hit.rigidbody.AddForce(-transform.forward * 30, ForceMode.Impulse);
             //On détruit l'object ayany le raycast qui applique la force au ragdoll
             //Il faut pas le détruire instant, il faut laisser un petit délai sinon la force ne s'appliquera pas correctement
             //Et le ragdoll tombera sur place
@@ -35,13 +39,4 @@ public class RaycastForceOnRagdoll : MonoBehaviour
             Destroy(gameObject, 0.1f);
         }
     }
-
-    //Au lieu de détruire la sphère (ça posera problème), juste la tp à sa position de base devrait suffire pour faire les enregistrements
-
-    //private void OnCollisionEnter(Collision other) {
-    //    foreach (ContactPoint contact in other.contacts) {
-    //        Debug.DrawRay(contact.point, contact.normal, Color.green, 2, false);
-    //        contactPoint = contact;
-    //    }
-    //}
 }
