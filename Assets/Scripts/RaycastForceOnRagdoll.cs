@@ -29,6 +29,11 @@ public class RaycastForceOnRagdoll : MonoBehaviour
         if(Physics.Raycast (transform.position, -transform.forward, out hit, Mathf.Infinity)){
             //On désactive le fait que tout le corps soit Kinematic, ce qui activera sa chute (il sera plus fix à sa position)
             RagdollEnable.m_isKinematic = false;
+            Debug.Log("Hit.transform.gameObject : " + hit.transform.root);
+            if(hit.transform.root.GetComponent<Animator>().enabled){
+                hit.transform.root.GetComponent<Animator>().enabled = false;
+            }
+            //hit.transform.gameObject.GetComponent<Animator>().enabled = false;
             //Application d'une force sur le point d'impact du raycast
             hit.rigidbody.AddForce(-transform.forward * 30, ForceMode.Impulse);
             //On détruit l'object ayany le raycast qui applique la force au ragdoll
