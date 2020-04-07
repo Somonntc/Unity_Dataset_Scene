@@ -9,6 +9,7 @@ public class RaycastForceOnRagdoll : MonoBehaviour
     private Transform t_object;
     [SerializeField] private GameObject prefab;
     private GameObject test;
+    [SerializeField] private float force = 15;
     
     
     private void Awake() {
@@ -35,7 +36,7 @@ public class RaycastForceOnRagdoll : MonoBehaviour
             }
             //hit.transform.gameObject.GetComponent<Animator>().enabled = false;
             //Application d'une force sur le point d'impact du raycast
-            hit.rigidbody.AddForce(-transform.forward * 30, ForceMode.Impulse);
+            hit.rigidbody.AddForce(-transform.forward * force, ForceMode.Impulse);
             //On détruit l'object ayany le raycast qui applique la force au ragdoll
             //Il faut pas le détruire instant, il faut laisser un petit délai sinon la force ne s'appliquera pas correctement
             //Et le ragdoll tombera sur place
