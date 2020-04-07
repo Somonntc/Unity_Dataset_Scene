@@ -1707,8 +1707,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8588398769549648348}
-  - component: {fileID: 1853826000152693926}
-  - component: {fileID: 598882763257334765}
+  - component: {fileID: -7827761431773475101}
   m_Layer: 0
   m_Name: m_clothes_anim
   m_TagString: Untagged
@@ -1735,26 +1734,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1853826000152693926
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4713939455604315087}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 59ed3d18cd5d95e44aa234046f56dd98, type: 3}
-  m_Controller: {fileID: 9100000, guid: 3d14109763581f042aa610d2fdacf6a8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 1
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &598882763257334765
+--- !u!114 &-7827761431773475101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

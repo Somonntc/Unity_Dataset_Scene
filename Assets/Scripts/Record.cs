@@ -11,12 +11,13 @@ public class Record : MonoBehaviour
     [SerializeField] private GameObject prefabPosition;
     [SerializeField] public GameObject prefab;
     [SerializeField] private GameObject sphere;
-    private GameObject test;
+    private GameObject sphereInstance;
     private GameObject model;
     private Transform cameraTransform;
     private Transform start;
-    private Rigidbody rb;
     private float timer = 4f;
+    //Variables qui permettent de "compter" le nombre de rotation, possibilité de changer
+    //la façon que j'ai utilisé qui n'est pas vraiment simple à comprendre
     private int rotateCounter_x = 1;
     private int rotateCounter_y = 0;
 
@@ -42,20 +43,23 @@ public class Record : MonoBehaviour
             RecorderWindow recorderWindow = GetRecorderWindow();
 
             //End the recording
-            if(rotateCounter_x == 36 && rotateCounter_y == 36){
+            if(rotateCounter_x == 4 && rotateCounter_y == 4){
                 recorderWindow.StopRecording();
                 yield break;
             }
 
             //Instantiate the prefab, fastest and easiest way I found to "reload" the prefab when the record is over (for the next one)
             model = Instantiate(prefab, new Vector3(0f , 0f, -1f), Quaternion.Euler(0f, 90f, 0f));
-            test = Instantiate(sphere, new Vector3(3f, 1.25f, 0.56f), Quaternion.Euler(0,0,0));
+            sphereInstance = Instantiate(sphere, new Vector3(3f, 1.25f, 0.56f), Quaternion.Euler(0,0,0));
             Destroy(model, timer);
-            if(rotateCounter_y%36 == 0 && rotateCounter_y != 0){
+
+            //Permet de fixer la limite du nombre d'enregistrement, ici 16 par exemple
+            if(rotateCounter_y%4 == 0 && rotateCounter_y != 0){
                 rotateCounter_x += 1;
                 rotateCounter_y = 0;
                 prefabPosition.transform.Rotate(10, 0, 0);
             }
+            //Change l'angle de la camera, avec un angle à préciser (ici 10)
             cameraTransform.Rotate(prefabPosition.transform.rotation.x, prefabPosition.transform.rotation.y + 10, prefabPosition.transform.rotation.z);
             rotateCounter_y += 1;
 
