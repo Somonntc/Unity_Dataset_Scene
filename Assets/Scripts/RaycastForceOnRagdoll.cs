@@ -12,6 +12,8 @@ public class RaycastForceOnRagdoll : MonoBehaviour
     [SerializeField] private float force = 15;
     //If you want to only make walking video (true if you want to activate the falling system)
     [SerializeField] private bool m_isActive = false;
+    [SerializeField] private float rayDistance = Mathf.Infinity;
+    private bool m_isHit = false;
     
     
     private void Awake() {
@@ -23,15 +25,18 @@ public class RaycastForceOnRagdoll : MonoBehaviour
         if(m_isActive){
             DisplayRaycastHit();
         }
+        if(m_isHit){
+            StartCoroutine(ExecuteAfterTime(0.1f));
+        }
         //gameObject.transform.position = new Vector3(gameObject.transform.position.x - 0.1f, 1.25f, 0.56f);
-        //t_object.position = new Vector3(t_object.position.x, t_object.position.y, t_object.position.z - 0.01f);
+        //t_object.position = new Vector3(t_object.position.x, t_object.position.y, t_object.position.z + 0.05f);
     }
 
     void DisplayRaycastHit(){
         RaycastHit hit;
         //Affiche le raycast sur l'éditeur pour savoir ou l'impact aura lieu
-        Debug.DrawRay(transform.position, -transform.forward * 100);
-        if(Physics.Raycast (transform.position, -transform.forward, out hit, Mathf.Infinity)){
+        Debug.DrawRay(transform.position, -transform.forward * rayDistance);
+        if(Physics.Raycast (transform.position, -transform.forward, out hit, rayDistance)){
             //On désactive le fait que tout le corps soit Kinematic, ce qui activera sa chute
             RagdollEnable.m_isKinematic = false;
             Debug.Log("Hit.transform.gameObject : " + hit.transform.root);
@@ -41,7 +46,12 @@ public class RaycastForceOnRagdoll : MonoBehaviour
             //hit.transform.gameObject.GetComponent<Animator>().enabled = false;
             //Application d'une force sur le point d'impact du raycast
             hit.rigidbody.AddForce(-transform.forward * force, ForceMode.Impulse);
-            Destroy(gameObject, 0.1f);
+            m_isHit = true;
         }
+    }
+
+    IEnumerator ExecuteAfterTime(float time){
+        yield return new WaitForSeconds(time);
+        m_isActive = false;
     }
 }

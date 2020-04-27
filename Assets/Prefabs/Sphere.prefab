@@ -124,3 +124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Object: {fileID: 4515648049902714918}
+  force: 20
+  m_isActive: 1
+  rayDistance: 1
