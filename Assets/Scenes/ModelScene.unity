@@ -285,7 +285,7 @@ PrefabInstance:
     - target: {fileID: 2496048949469750427, guid: cd5523a2f6b44a8409f9c1e06fad4969,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd5523a2f6b44a8409f9c1e06fad4969, type: 3}
@@ -637,10 +637,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabPosition: {fileID: 1157255314}
-  prefab: {fileID: 2462258979604576607, guid: 74d794c5101fef149a774beb52917b6d, type: 3}
+  prefab: {fileID: 2496048949469750427, guid: cd5523a2f6b44a8409f9c1e06fad4969, type: 3}
   sphere: {fileID: 4515648049902714918, guid: 169abd5107521a14fa1bef64cd03f958, type: 3}
-  NumberOfRecords: 4
-  timer: 1
+  NumberOfRecords: 100
+  timer: 3
   ActivateSphere: 0
 --- !u!114 &1157255317
 MonoBehaviour:
@@ -746,17 +746,17 @@ PrefabInstance:
     - target: {fileID: 6109601288124877140, guid: 1d3848a9f97af34468184aab71aea62c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.155
+      value: -4.62
       objectReference: {fileID: 0}
     - target: {fileID: 6109601288124877140, guid: 1d3848a9f97af34468184aab71aea62c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4
+      value: 0.78
       objectReference: {fileID: 0}
     - target: {fileID: 6109601288124877140, guid: 1d3848a9f97af34468184aab71aea62c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.6
+      value: -2.4
       objectReference: {fileID: 0}
     - target: {fileID: 6109601288124877140, guid: 1d3848a9f97af34468184aab71aea62c,
         type: 3}
@@ -797,6 +797,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6109601288124877141, guid: 1d3848a9f97af34468184aab71aea62c,
+        type: 3}
+      propertyPath: force
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6109601288124877144, guid: 1d3848a9f97af34468184aab71aea62c,
         type: 3}
